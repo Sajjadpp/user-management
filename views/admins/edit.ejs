@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v10 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- LINEARICONS -->
+		<link rel="stylesheet" href="/fonts/linearicons/style.css">
+		
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+
+	<body>
+		<div class="loader" id="loader"></div>
+		<div class="wrapper">
+			
+			<div class="inner">
+				<img src="/images/image-1.png" alt="" class="image-1">
+				<form action="/admin/saveEdit/<%= user._id %>" method="post">
+					<div id="result"></div>
+					<h3>Edit user details</h3>
+					<div class="form-holder">
+						<span class="lnr lnr-user"></span>
+						<input type="text" class="form-control" placeholder="Username" name="userName" value="<%= user.userName %>">
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-phone-handset"></span>
+						<input type="text" class="form-control" placeholder="Phone Number" name="mobileNo" value="<%= user.mobileNo %>">
+					</div>
+					<div class="form-holder">
+						<span class="lnr lnr-envelope"></span>
+						<input type="text" class="form-control" placeholder="Mail" name="email" value="<%= user.email %>">
+					</div>
+					
+					<button>
+						<span>save changes</span>
+					</button>
+				</form>
+				<img src="/images/image-2.png" alt="" class="image-2">
+			</div>
+			
+		</div>
+		
+		
+	</body>
+</html>
+
+
+<style>
+    .loader{
+		
+        width: 30px;
+        height: 30px;
+        border: 5px solid #99ccff;
+        border-bottom: none;
+        border-left: none;
+        z-index: 10;
+		display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-top-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+    
+    }
+	.loader::after{
+
+		content:" ";
+		width: 30px;
+		height: 30px;
+		z-index: 3;
+		position: absolute;
+		border: 5px solid #094c8f;
+		border-top-left-radius: 50%;
+		border-top: none;
+		border-right: none;
+		border-bottom-right-radius: 50%;
+		top: 10px;
+	}
+    @keyframes loading {
+        
+        from{
+            transform: rotate(0);
+        }
+        to{
+            transform: rotate(360deg);
+        }
+    }
+	.active{
+
+		animation: loading 1s infinite;
+		display: flex !important;
+	}
+</style>

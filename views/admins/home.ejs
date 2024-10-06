@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'poppins', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            background-color: #99ccff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .logout-btn {
+            background-color: #fff;
+            color: #1e90ff;
+            font-family: "poppins";
+            font-weight: 700;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .logout-btn:hover {
+            background-color: #e4fdff;
+        }
+        .search-bar{
+            width: 70%;
+        }
+        .search-bar input {
+            width: 90%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: box-shadow 0.3s ease;
+            font-family: "poppins";
+        }
+        .search-bar input:focus {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            outline: none;
+        }
+        .user-list {
+            margin-top: 20px;
+        }
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .user-item:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .user-info span {
+            display: block;
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+        .user-info span.email {
+            font-size: 16px;
+            color: #777;
+            margin-top: 4px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .edit-btn, .delete-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            font-family: "poppins";
+        }
+        .edit-btn {
+            background-color: #1e90ff;
+            color: white;
+        }
+        .edit-btn:hover {
+            background-color: #4682b4;
+        }
+        .delete-btn {
+            background-color: #ff4757;
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #ff6b81;
+        }
+        .searchAndBtn{
+
+            display: flex;
+            width: 100%;
+            padding: 0 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .create-btn{
+            width: 30%;
+        }
+        .create-btn button{
+
+            padding: 10px 20px;
+            width: 100%;    
+            background-color: #fff;
+            border-radius: 7px;
+            border: none;
+            box-shadow: 0 0 3px solid rgba(0, 0, 0, 0.6);
+            font-weight: 500;
+            font-family: "poppins";
+        }
+        .create-btn button:hover{
+            
+            box-shadow: 0 0 8px rgba(20, 20, 20, 0.6);
+            color: #fff;
+            background-color: #99ccff;
+            
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        .oops{
+
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header section with Logout -->
+
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <button class="logout-btn" onclick="location.href = '/admin/logout'">Logout</button>
+        </div>
+
+        <!-- Search Bar -->
+         <div class="searchAndBtn">
+            <div class="search-bar">
+                <input type="text" placeholder="Search users . . ." id="search">
+            </div>
+            <div class="create-btn">
+                <button onclick="location.href = '/admin/createUser' ">create</button>
+            </div>
+         </div>
+        
+
+        <!-- User List Section -->
+        <div class="user-list"  id="user-list">
+            <!-- Example user item -->
+            <% userData.map((user)=>{ %>
+                <div class="user-item">
+                    <div class="user-info">
+                        <span><%= user.userName %></span>
+                        <span class="email"><%= user.email %></span>
+                    </div>
+                    <div class="mobileno">
+                        <span><%= user.mobileNo %></span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="edit-btn"><a href="/admin/edit/<%= user._id %>">Edit</a></button>
+                        <button class="delete-btn" onclick="popup('<%= user._id %>')">Delete</button>
+                    </div>
+                </div>
+           <% }) %>
+            <!-- More users will go here -->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
+
+
+<script>
+
+    let search = document.getElementById("search");
+    let result = document.getElementById("result");
+    let userList = document.getElementById("user-list")
+
+    search.addEventListener("input",(e)=>{
+        
+        fetch("/admin/search",{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({search:e.target.value})
+        })
+        .then((res)=> res.json())
+        .then((data)=>{
+            if(data.message.length != 0){
+
+                userList.innerHTML = ''
+                
+                data.message.map((users)=>{
+                    let element = 
+                    `<div class="user-item">
+                        <div class="user-info">
+                            <span> ${users.userName}</span>
+                            <span class="email">${users.email}</span>
+                        </div>
+                        <div class="mobileno">
+                            <span>${users.mobileNo}</span>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="edit-btn"><a href='/admin/edit/${users._id}'>Edit</a></button>
+                            <button class="delete-btn">Delete</button>
+                        </div>
+                    </div>
+                    `
+                
+                    userList.innerHTML+= element
+                })
+            }
+            else{
+                userList.innerHTML = ""
+                let element = `
+                    <div class="user-item">
+                        <p class="oops">opps!! <br> no users containing this name</p>    
+                    </div>`
+                userList.innerHTML = element
+            }
+        })
+    })
+
+    function popup(id){
+
+        new swal({
+            tittle: "Are you sure?",
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        })
+        .then((res)=>{
+
+            if(res.value){
+                location.href = `/admin/delete/${id}`
+                new swal({
+                    tittle: "Deleted"
+
+                })
+            }
+        })
+    }
+    
+
+</script>
